@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacer Pedido | SaveFood</title>
+  <link rel="icon" type="image/svg+xml" href="resources/logo_mini.svg">
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Estilos específicos para el formulario -->
+  <style>
+    .form-container {
+      background-color: white;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-header h2 {
+      color: #2e7d32;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .form-header p {
+      color: #666;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: inherit;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #2e7d32;
+      box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+    }
+
+    .btn-enviar {
+      width: 100%;
+      padding: 15px;
+      background-color: #f57c00;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn-enviar:hover {
+      background-color: #e65100;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER (Igual al index) -->
+  <header class="header-principal">
+    <nav class="navegacion">
+      <div class="logo">
+        <a href="index.html">
+          <img src="resources/logo_full.svg" alt="Logo SaveFood" class="logo-img">
+        </a>
+      </div>
+      
+      <ul class="enlaces-menu">
+        <li><a href="menu.html">Menú de Comidas</a></li>
+        <li><a href="form_pedido.html" style="color: #f57c00;">Hacer un Pedido</a></li>
+        <li><a href="ofertas.html">Ofertas Especiales</a></li>
+      </ul>
+
+      <div class="accesos-usuario">
+        <a href="login.html" class="btn-login">Iniciar Sesión</a>
+        <a href="registrar.html" class="btn-registro">Registrarse</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <div class="form-container">
+        
+        <div class="form-header">
+          <h2>🥗 Arma tu Pedido</h2>
+          <p>Completa el formulario para reservar tu comida rescatada.</p>
+        </div>
+
+        <form action="#" method="POST">
+          
+          <div class="form-group">
+            <label for="nombre">Nombre Completo</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Correo Electrónico</label>
+            <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="+51 999 999 999" required>
+          </div>
+
+          <div class="form-group">
+            <label for="plato">¿Qué plato te interesa?</label>
+            <select id="plato" name="plato">
+              <option value="mixto">Menú Mixto de Hoy</option>
+              <option value="vegano">Opción Vegana</option>
+              <option value="postre">Postres Salvados</option>
+              <option value="otro">Sorpréndeme (Random)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="cantidad">Cantidad de personas</label>
+            <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="1">
+          </div>
+
+          <div class="form-group">
+            <label for="notas">Notas especiales (Alergias, etc.)</label>
+            <textarea id="notas" name="notas" rows="3" placeholder="Ej: Soy alérgico a los frutos secos..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-enviar">Confirmar Pedido</button>
+          
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-principal">
+    <div class="footer-contenedor">
+      <div class="footer-info">
+        <h3>SaveFood</h3>
+        <p>Dándole una segunda oportunidad a la buena comida.</p>
+      </div>
+      <div class="footer-contacto">
+        <p> Arequipa, Arequipa</p>
+        <p>✉️ hola@savefood.pe</p>
+      </div>
+      <div class="footer-redes">
+        <p>Síguenos para más ofertas:</p>
+        <a href="#">📷 @SaveFood_AQP</a> | <a href="#">📘 Savefood</a>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <p>&copy; 2026 SaveFood. Proyecto de Taller de Programación.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

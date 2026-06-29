@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú de Comidas | SaveFood</title>
+    <link rel="icon" type="image/svg+xml" href="resources/logo_mini.svg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header-principal">
+        <nav class="navegacion">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="resources/logo_full.svg" alt="SaveFood" class="logo-img">
+                </a>
+            </div>
+
+            <ul class="enlaces-menu">
+                <li><a href="menu.html">Menú de Comidas</a></li>
+                <li><a href="form_pedido.html">Hacer un Pedido</a></li>
+                <li><a href="ofertas.html">Ofertas Especiales</a></li>
+            </ul>
+
+            <div class="accesos-usuario">
+                <a href="login.html" class="btn-login">Iniciar Sesión</a>
+                <a href="registrar.html" class="btn-registro">Registrarse</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+    <section class="container-menu">
+        <div class="titulo-seccion">
+            <h1 class="page-title">NUESTRO MENÚ ESPECIAL</h1>
+            <p class="subhead">Disfruta nuestros mejores platillos con descuentos exclusivos.</p>
+        </div>
+
+        <div class="contenedor-menu">
+            <article class="card">
+                <img src="resources/tacos.png" alt="Tacos al Pastor">
+                <div class="contenido">
+                    <h2>Tacos al Pastor</h2>
+                    <p class="descripcion">Deliciosos tacos mexicanos con carne marinada, cebolla y cilantro fresco.</p>
+                    <p class="precio-original">S/ 18.00</p>
+                    <p class="precio-descuento">S/ 14.90</p>
+                    <button class="btn-animado" data-name="Tacos al Pastor" data-price="14.90">Añadir al carrito</button>
+                </div>
+            </article>
+
+            <article class="card destacado">
+                <img src="resources/burger.png" alt="Hamburguesa Clásica">
+                <div class="contenido">
+                    <h2>Burger Clásica</h2>
+                    <p class="descripcion">Hamburguesa artesanal con queso cheddar, vegetales frescos y papas fritas.</p>
+                    <p class="precio-original">S/ 15.50</p>
+                    <p class="precio-descuento">S/ 11.99</p>
+                    <button class="btn-animado" data-name="Burger Clásica" data-price="11.99">Añadir al pedido</button>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="resources/sushi.png" alt="Sushi Premium">
+                <div class="contenido">
+                    <h2>Muestra de Sushi</h2>
+                    <p class="descripcion">Sushi premium con salmón, aguacate y salsa especial.</p>
+                    <p class="precio-original">S/ 22.00</p>
+                    <p class="precio-descuento">S/ 18.00</p>
+                    <button class="btn-animado" data-name="Muestra de Sushi" data-price="18.00">Añadir al carrito</button>
+                </div>
+            </article>
+        </div>
+    </section>
+    </main>
+
+    <footer class="footer-principal">
+        <div class="footer-contenedor">
+            <div class="footer-info">
+                <h3>SaveFood</h3>
+                <p>La mejor comida rápida con entrega inmediata.</p>
+            </div>
+
+            <div class="footer-contacto">
+                <p>📍 Arequipa - Perú</p>
+                <p>📞 +51 999 999 999</p>
+                <p>✉ contacto@sabordirecto.com</p>
+            </div>
+
+            <div class="footer-redes">
+                <p><a href="#">Facebook</a></p>
+                <p><a href="#">Instagram</a></p>
+                <p><a href="#">TikTok</a></p>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            © 2026 SaveFood - Todos los derechos reservados
+        </div>
+    </footer>
+
+    <script src="menu-script.js" defer></script>
+</body>
+
+</html>
