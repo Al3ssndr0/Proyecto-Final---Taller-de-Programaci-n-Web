@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <rect x="10" y="45" width="40" height="6" rx="3" fill="#f57c00" />
+  <path d="M 15 45 C 15 20, 45 20, 45 45 Z" fill="#2e7d32" />
+  <path d="M 30 20 Q 38 10 45 15 Q 38 25 30 20 Z" fill="#4caf50" />
+  <text x="60" y="42" font-family="'Segoe UI', Tahoma, sans-serif" font-size="28" font-weight="800" fill="#2e7d32">Save<tspan fill="#f57c00">Food</tspan></text>
+</svg>
