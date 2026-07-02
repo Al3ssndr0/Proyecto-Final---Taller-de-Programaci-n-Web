@@ -1,6 +1,7 @@
-/*
-   RESETEO GENERAL
-*/
+/* =========================================
+   SESIÓN 01 - Reset y estilos base
+   ========================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -9,8 +10,8 @@
 }
 
 body {
-    background-color: #f4f7f6; /* Fondo gris muy claro */
-    color: #333333;            /* Gris oscuro para el texto normal */
+    background-color: #f4f7f6;
+    color: #333333;
     line-height: 1.6;
 }
 
@@ -23,9 +24,20 @@ ul {
     list-style: none;
 }
 
-/*
-   1. BARRA DE NAVEGACIÓN (HEADER)
-*/
+/* =========================================
+   SESIÓN 02 - Contenedor general
+   ========================================= */
+
+.contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* =========================================
+   SESIÓN 02 - Header y Navegación
+   ========================================= */
+
 .header-principal {
     background-color: #ffffff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -43,17 +55,11 @@ ul {
     padding: 15px 20px;
 }
 
-.logo h2 {
-    color: #2e7d32; /* Verde oscuro */
-    font-size: 24px;
-    font-weight: 800;
-}
-
 .logo-img {
-    height: 45px; /* Tamaño del logo*/
-    width: auto;  /* Mantiene las proporciones correctas de la imagen */
-    display: block; /* Evita pequeños márgenes invisibles debajo de la imagen */
-    transition: transform 0.3s ease; /* Efecto suave para cuando pases el mouse */
+    height: 45px;
+    width: auto;
+    display: block;
+    transition: transform 0.3s ease;
 }
 
 .logo-img:hover {
@@ -71,8 +77,48 @@ ul {
 }
 
 .enlaces-menu a:hover {
-    color: #f57c00; /* Naranja oferta */
+    color: #f57c00;
 }
+
+/* =========================================
+   SESIÓN 02 - Página activa en el menú
+   ========================================= */
+
+.pagina-activa {
+    color: #f57c00 !important;
+    font-weight: 700 !important;
+    border-bottom: 3px solid #f57c00;
+    padding-bottom: 2px;
+}
+
+/* =========================================
+   SESIÓN 13 - Carrito de compras (icono y contador)
+   ========================================= */
+
+.carrito-icono {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2e7d32;
+    cursor: default;
+}
+
+.contador-carrito {
+    background-color: #f57c00;
+    color: #ffffff;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 14px;
+    font-weight: bold;
+    min-width: 22px;
+    text-align: center;
+}
+
+/* =========================================
+   SESIÓN 02 - Accesos de usuario
+   ========================================= */
 
 .accesos-usuario {
     display: flex;
@@ -82,34 +128,36 @@ ul {
 
 .btn-login {
     font-weight: 600;
-    color: #2e7d32; /* Verde oscuro */
+    color: #2e7d32;
+    transition: color 0.3s ease;
 }
 
 .btn-login:hover {
-    color: #f57c00; /* Naranja oferta */
+    color: #f57c00;
 }
 
 .btn-registro {
-    background-color: #2e7d32; /* Verde oscuro */
+    background-color: #2e7d32;
     color: #ffffff;
     padding: 8px 16px;
     border-radius: 5px;
     font-weight: 600;
-    transition: background 0.3s;
+    transition: background 0.3s ease;
 }
 
 .btn-registro:hover {
-    background-color: #4caf50; /* Verde claro */
+    background-color: #4caf50;
 }
 
-/*
-   2. SECCIÓN PRINCIPAL (HERO SECTION)
-*/
+/* =========================================
+   SESIÓN 02 / SESIÓN 09 - Hero Section
+   ========================================= */
+
 .hero-section {
     min-height: 100vh;
     text-align: center;
     padding: 80px 20px;
-    background-color: #ffffff;
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%);
     margin-bottom: 40px;
 }
 
@@ -119,13 +167,14 @@ ul {
 }
 
 .hero-contenido h1 {
-    font-size: 48px; /* Aumentamos un poco el tamaño para el efecto full screen */
+    font-size: 48px;
     color: #2e7d32;
     margin-bottom: 20px;
+    animation: fadeIn 1.2s ease-in-out;
 }
 
 .hero-contenido p {
-    font-size: 20px; /* Texto un poco más grande y legible */
+    font-size: 20px;
     margin-bottom: 40px;
     color: #555;
 }
@@ -137,39 +186,83 @@ ul {
     flex-wrap: wrap;
 }
 
-/* Estilos compartidos para botones grandes */
-.btn-primario, .btn-secundario {
+/* =========================================
+   SESIÓN 06 - Botones (unificados)
+   ========================================= */
+
+.btn-primario,
+.btn-secundario,
+.btn-login-form,
+.btn-enviar,
+.btn-ancho-completo {
     padding: 12px 24px;
     border-radius: 5px;
     font-weight: bold;
     font-size: 16px;
+    border: none;
+    cursor: pointer;
     transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
 }
 
-.btn-primario {
-    background-color: #f57c00; /* Naranja oferta */
+.btn-primario,
+.btn-login-form,
+.btn-enviar,
+.btn-ancho-completo {
+    background-color: #f57c00;
     color: #ffffff;
 }
 
-.btn-primario:hover {
-    background-color: #e65100; /* Naranja hover */
+.btn-primario:hover,
+.btn-login-form:hover,
+.btn-enviar:hover,
+.btn-ancho-completo:hover {
+    background-color: #e65100;
     transform: translateY(-2px);
 }
 
 .btn-secundario {
     background-color: transparent;
-    color: #f57c00; /* Naranja oferta */
-    border: 2px solid #f57c00; /* Naranja oferta */
+    color: #f57c00;
+    border: 2px solid #f57c00;
 }
 
 .btn-secundario:hover {
-    background-color: #f57c00; /* Naranja oferta */
+    background-color: #f57c00;
     color: #ffffff;
 }
 
-/*
-   3. SECCIÓN: ¿CÓMO FUNCIONA?
-*/
+.btn-animado {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #2e7d32;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.btn-animado:hover {
+    background: #4caf50;
+}
+
+.btn-animado:active {
+    transform: scale(0.98);
+}
+
+.btn-ancho-completo {
+    width: 100%;
+    display: block;
+}
+
+/* =========================================
+   SESIÓN 08 - Grid (Cómo funciona)
+   ========================================= */
+
 .como-funciona-section {
     max-width: 1200px;
     margin: 0 auto;
@@ -178,25 +271,23 @@ ul {
 }
 
 .como-funciona-section h2 {
-    color: #2e7d32; /* Verde oscuro */
+    color: #2e7d32;
     margin-bottom: 40px;
     font-size: 28px;
 }
 
 .pasos-contenedor {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    flex-wrap: wrap;
 }
 
 .paso-tarjeta {
-    background-color: #ffffff;
     padding: 30px 20px;
     border-radius: 10px;
-    width: 300px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s;
+    background-color: #ffffff;
 }
 
 .paso-tarjeta:hover {
@@ -205,7 +296,7 @@ ul {
 
 .numero-paso {
     display: inline-block;
-    background-color: #4caf50; /* Verde claro */
+    background-color: #4caf50;
     color: #ffffff;
     width: 40px;
     height: 40px;
@@ -216,11 +307,628 @@ ul {
     margin-bottom: 15px;
 }
 
-/*
-   4. PIE DE PÁGINA (FOOTER)
-*/
+/* =========================================
+   SESIÓN 06 / SESIÓN 08 - Menú (Cards con Flexbox)
+   ========================================= */
+
+.container-menu {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.titulo-seccion {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-title {
+    font-size: 36px;
+    color: #2e7d32;
+    margin-bottom: 10px;
+}
+
+.subhead {
+    color: #666;
+    font-size: 18px;
+}
+
+.contenedor-menu {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: #fff;
+    width: 280px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    animation: slideUp 0.8s ease forwards;
+    opacity: 0;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.3s; }
+.card:nth-child(3) { animation-delay: 0.5s; }
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+}
+
+.contenido {
+    padding: 20px;
+}
+
+.contenido h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.descripcion {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.precio-original {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 13px;
+}
+
+.precio-descuento {
+    font-size: 18px;
+    font-weight: bold;
+    color: #f57c00;
+    margin: 8px 0;
+}
+
+.destacado {
+    border: 2px solid #f57c00;
+    transform: scale(1.02);
+}
+
+.destacado:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+/* =========================================
+   SESIÓN 08 - Grid (Ofertas Especiales)
+   ========================================= */
+
+.ofertas-encabezado {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.ofertas-encabezado h1 {
+    color: #2e7d32;
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.ofertas-encabezado p {
+    color: #555;
+    font-size: 18px;
+}
+
+.grid-ofertas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.tarjeta-oferta {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjeta-oferta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.indicador-urgencia {
+    background-color: #f57c00;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    animation: parpadeo 1.5s ease-in-out infinite;
+}
+
+.urgencia-alta {
+    background-color: #d32f2f;
+}
+
+.oferta-contenido {
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.producto-nombre {
+    color: #333333;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.producto-restaurante {
+    color: #777777;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.producto-precios {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    padding-top: 15px;
+    border-top: 1px dashed #dddddd;
+}
+
+.precio-original {
+    color: #999999;
+    text-decoration: line-through;
+    font-size: 16px;
+}
+
+.precio-descuento {
+    color: #2e7d32;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+/* =========================================
+   SESIÓN 03 / SESIÓN 10 - Formularios (Login, Registro, Pedido)
+   ========================================= */
+
+.contenedor-login {
+    min-height: calc(100vh - 90px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #f1f8e9, #ffffff, #e8f5e9);
+}
+
+.card-login {
+    width: 100%;
+    max-width: 470px;
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    animation: aparecer 0.7s ease;
+}
+
+.card-login.registro {
+    max-width: 560px;
+}
+
+.card-login h1 {
+    text-align: center;
+    color: #2e7d32;
+    margin-bottom: 10px;
+    font-size: 34px;
+}
+
+.card-login p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 15px;
+}
+
+.card-login form {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-login label {
+    margin-bottom: 8px;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+.card-login input {
+    padding: 14px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: 0.3s;
+    margin-bottom: 6px; /* separación entre inputs */
+}
+
+.card-login input:focus {
+    outline: none;
+    border-color: #2e7d32;
+    box-shadow: 0 0 8px rgba(46, 125, 50, 0.25);
+}
+
+.btn-login-form {
+    margin-top: 30px; /* más separación */
+    padding: 15px;
+    background: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-login-form:hover {
+    background: #4caf50;
+}
+
+.texto-login {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.texto-login a {
+    color: #f57c00;
+    font-weight: bold;
+}
+
+.texto-login a:hover {
+    text-decoration: underline;
+}
+
+/* =========================================
+   SESIÓN 03 / SESIÓN 10 - Formulario de Pedido
+   ========================================= */
+
+.form-container {
+    background-color: white;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-header h2 {
+    color: #2e7d32;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.form-header p {
+    color: #666;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+}
+
+/* =========================================
+   SESIÓN 13 - Resumen del carrito en pedido
+   ========================================= */
+
+.resumen-carrito {
+    background-color: #f9fbe7;
+    border: 1px solid #c5e1a5;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    display: none;
+}
+
+.resumen-carrito.visible {
+    display: block;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.resumen-carrito h3 {
+    color: #2e7d32;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.lista-carrito {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.item-carrito {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed #dcedc8;
+}
+
+.item-carrito:last-child {
+    border-bottom: none;
+}
+
+.item-nombre {
+    font-weight: 500;
+    color: #333;
+}
+
+.item-cantidad {
+    color: #777;
+}
+
+.item-precio {
+    font-weight: 600;
+    color: #2e7d32;
+}
+
+.total-carrito {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid #2e7d32;
+    text-align: right;
+    font-size: 18px;
+    color: #2e7d32;
+}
+
+.carrito-vacio {
+    text-align: center;
+    color: #777;
+    padding: 15px 0;
+}
+
+.carrito-vacio a {
+    color: #f57c00;
+    font-weight: bold;
+}
+
+.carrito-vacio a:hover {
+    text-decoration: underline;
+}
+
+.carrito-nota {
+    margin-top: 10px;
+    color: #888;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* =========================================
+   SESIÓN 04 - Estilos para la tabla de pedidos
+   ========================================= */
+
+.pedidos-section {
+    padding: 40px 20px;
+    min-height: 80vh;
+}
+
+.pedidos-encabezado {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.pedidos-encabezado h1 {
+    color: #2e7d32;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.pedidos-encabezado p {
+    color: #666;
+    font-size: 18px;
+}
+
+.tabla-contenedor {
+    overflow-x: auto;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    animation: slideIn 0.7s ease forwards;
+}
+
+.tabla-pedidos {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    font-size: 15px;
+}
+
+.tabla-pedidos thead {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.tabla-pedidos th {
+    padding: 14px 20px;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.tabla-pedidos td {
+    padding: 14px 20px;
+    border-bottom: 1px solid #e8f5e9;
+    vertical-align: middle;
+}
+
+.tabla-pedidos tbody tr:hover {
+    background-color: #f1f8e9;
+    transition: background 0.2s ease;
+}
+
+.tabla-pedidos tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* =========================================
+   SESIÓN 06 - Estados de los pedidos (badges)
+   ========================================= */
+
+.estado {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.estado-enviado {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.estado-proceso {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+.estado-preparando {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+}
+
+/* =========================================
+   SESIÓN 02 / SESIÓN 09 - Acciones (botones)
+   ========================================= */
+
+.pedidos-acciones {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* =========================================
+   SESIÓN 07 - Animaciones @keyframes
+   ========================================= */
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes parpadeo {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   SESIÓN 02 - Footer
+   ========================================= */
+
 .footer-principal {
-    background-color: #333333; /* Gris oscuro */
+    background-color: #333333;
     color: #ffffff;
     padding: 40px 20px 20px;
     margin-top: 50px;
@@ -237,17 +945,18 @@ ul {
 }
 
 .footer-info h3 {
-    color: #4caf50; /* Verde claro */
+    color: #4caf50;
     margin-bottom: 10px;
 }
 
-.footer-contacto p, .footer-redes p {
+.footer-contacto p,
+.footer-redes p {
     margin-bottom: 8px;
     color: #ddd;
 }
 
 .footer-redes a {
-    color: #f57c00; /* Naranja oferta */
+    color: #f57c00;
 }
 
 .footer-redes a:hover {
@@ -260,4 +969,341 @@ ul {
     padding-top: 20px;
     font-size: 14px;
     color: #aaa;
+}
+
+/* =========================================
+   SESIÓN 09 - Responsive (Media Queries)
+   ========================================= */
+
+/* ===== Tablet ===== */
+@media (max-width: 768px) {
+
+    .navegacion {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 10px;
+    }
+
+    .enlaces-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .accesos-usuario {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .card {
+        width: 250px;
+    }
+
+    .card img {
+        height: 130px;
+    }
+
+    .page-title {
+        font-size: 28px;
+    }
+
+    .card-login {
+        padding: 30px;
+    }
+
+    .card-login h1 {
+        font-size: 28px;
+    }
+
+    .form-container {
+        padding: 30px;
+    }
+
+    /* ===== Tabla de pedidos (responsive) ===== */
+    .tabla-pedidos thead {
+        display: none;
+    }
+
+    .tabla-pedidos,
+    .tabla-pedidos tbody,
+    .tabla-pedidos tr,
+    .tabla-pedidos td {
+        display: block;
+        width: 100%;
+    }
+
+    .tabla-pedidos tr {
+        margin-bottom: 20px;
+        border: 1px solid #e8f5e9;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .tabla-pedidos td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 12px;
+        border-bottom: 1px solid #f1f8e9;
+        font-size: 14px;
+    }
+
+    .tabla-pedidos td:last-child {
+        border-bottom: none;
+    }
+
+    .tabla-pedidos td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #2e7d32;
+        margin-right: 15px;
+    }
+
+    .pedidos-encabezado h1 {
+        font-size: 28px;
+    }
+
+    .pedidos-encabezado p {
+        font-size: 16px;
+    }
+
+    .pedidos-acciones {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .pedidos-acciones .btn-primario,
+    .pedidos-acciones .btn-secundario {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+}
+
+/* ===== Móvil ===== */
+@media (max-width: 480px) {
+
+    .enlaces-menu {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .contenedor-menu {
+        gap: 15px;
+        padding: 0 10px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .card img {
+        height: 120px;
+    }
+
+    .page-title {
+        font-size: 24px;
+    }
+
+    .subhead {
+        font-size: 16px;
+    }
+
+    .card-login {
+        padding: 25px;
+    }
+
+    .card-login h1 {
+        font-size: 24px;
+    }
+
+    .btn-login-form {
+        font-size: 15px;
+    }
+
+    .form-container {
+        padding: 25px;
+    }
+
+    .hero-contenido h1 {
+        font-size: 32px;
+    }
+
+    .hero-contenido p {
+        font-size: 16px;
+    }
+
+    /* ===== Tabla de pedidos (móvil) ===== */
+    .tabla-pedidos td {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+
+    .pedidos-encabezado h1 {
+        font-size: 24px;
+    }
+
+    .pedidos-encabezado p {
+        font-size: 15px;
+    }
+}
+
+/* =========================================
+   SESIÓN 04 - Estilos para la tabla del menú
+   ========================================= */
+
+.tabla-menu-contenedor {
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 2px dashed #c8e6c9;
+}
+
+.tabla-menu-titulo {
+    text-align: center;
+    color: #2e7d32;
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+.tabla-menu {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-size: 14px;
+}
+
+.tabla-menu thead {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.tabla-menu th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.tabla-menu td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e8f5e9;
+    vertical-align: middle;
+}
+
+.tabla-menu tbody tr:hover {
+    background-color: #f1f8e9;
+    transition: background 0.2s ease;
+}
+
+.tabla-menu tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.btn-tabla {
+    width: auto;
+    padding: 6px 16px;
+    font-size: 13px;
+}
+
+/* =========================================
+   SESIÓN 04 - Responsive para tabla del menú
+   ========================================= */
+
+@media (max-width: 768px) {
+    .tabla-menu thead {
+        display: none;
+    }
+
+    .tabla-menu,
+    .tabla-menu tbody,
+    .tabla-menu tr,
+    .tabla-menu td {
+        display: block;
+        width: 100%;
+    }
+
+    .tabla-menu tr {
+        margin-bottom: 15px;
+        border: 1px solid #e8f5e9;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .tabla-menu td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 12px;
+        border-bottom: 1px solid #f1f8e9;
+        font-size: 14px;
+    }
+
+    .tabla-menu td:last-child {
+        border-bottom: none;
+    }
+
+    .tabla-menu td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #2e7d32;
+        margin-right: 15px;
+    }
+
+    .btn-tabla {
+        width: 100%;
+    }
+
+    .tabla-menu-titulo {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tabla-menu td {
+        font-size: 13px;
+        padding: 8px 10px;
+        flex-wrap: wrap;
+    }
+
+    .tabla-menu td::before {
+        font-size: 13px;
+    }
+
+    .tabla-menu-titulo {
+        font-size: 20px;
+    }
+}
+
+/* =========================================
+   SESIÓN 08 - Grid Layout para todas las páginas
+   ========================================= */
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* =========================================
+   SESIÓN 02 - Enlaces "Volver" en formulario (mejorado)
+   ========================================= */
+
+.form-acciones {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 35px;
+    padding-top: 25px;
+    border-top: 2px solid #e8f5e9;
+    flex-wrap: wrap;
 }

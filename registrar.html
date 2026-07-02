@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Crea una cuenta en SaveFood y comienza a disfrutar de ofertas de comida mientras ayudas a reducir el desperdicio de alimentos.">
+
+    <title>Registro | SaveFood</title>
+
+    <link rel="icon" type="image/svg+xml" href="resources/logo_mini.svg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+         SESIÓN 02 - ENCABEZADO DEL SITIO
+    ========================================= -->
+
+    <header class="header-principal">
+
+        <nav class="navegacion">
+
+            <div class="logo">
+                <a href="index.html">
+                    <img src="resources/logo_full.svg" class="logo-img" alt="Logo SaveFood">
+                </a>
+            </div>
+
+            <ul class="enlaces-menu">
+                <li><a href="menu.html">Menú</a></li>
+                <li><a href="ofertas.html">Ofertas</a></li>
+                <li><a href="form_pedido.html">Pedidos</a></li>
+                <li><a href="pedidos.html">Mis Pedidos</a></li>
+            </ul>
+
+        </nav>
+
+    </header>
+
+    <!-- =========================================
+         SESIÓN 03 / 10 - FORMULARIO DE REGISTRO
+    ========================================= -->
+
+    <!-- Eliminada la clase grid-layout para mantener el centrado vertical -->
+    <main class="contenedor-login">
+
+        <div class="card-login registro">
+
+            <h1>Crear Cuenta</h1>
+
+            <p>
+                Regístrate para comenzar a rescatar comida y acceder a todas las funciones de SaveFood.
+            </p>
+
+            <form id="registroForm">
+
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre" maxlength="40" required>
+
+                <label for="apellido">Apellido</label>
+                <input type="text" id="apellido" name="apellido" placeholder="Ingrese su apellido" maxlength="40" required>
+
+                <label for="correo">Correo electrónico</label>
+                <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com" maxlength="100" required>
+
+                <label for="usuarioRegistro">Usuario</label>
+                <input type="text" id="usuarioRegistro" name="usuario" placeholder="Nombre de usuario" maxlength="30" required>
+
+                <label for="claveRegistro">Contraseña</label>
+                <input type="password" id="claveRegistro" name="clave" placeholder="Contraseña" maxlength="30" required>
+
+                <label for="confirmarClave">Confirmar contraseña</label>
+                <input type="password" id="confirmarClave" name="confirmarClave" placeholder="Repita la contraseña" maxlength="30" required>
+
+                <button type="submit" class="btn-login-form">
+                    Registrarse
+                </button>
+
+            </form>
+
+            <p class="texto-login">
+                ¿Ya tienes una cuenta?
+                <a href="login.html">Inicia sesión</a>
+            </p>
+
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

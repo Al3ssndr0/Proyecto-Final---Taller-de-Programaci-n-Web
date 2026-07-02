@@ -1,98 +1,125 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Inicio | SaveFood</title>
-        <link rel="icon" type="image/svg+xml" href="resources/logo_mini.svg">
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-  <header class="header-principal">
-    <nav class="navegacion">
-      <div class="logo">
-        <a href="index.html">
-          <img src="resources/logo_full.svg" alt="Logo SaveFood" class="logo-img">
-        </a>
-      </div>
-      
-      <ul class="enlaces-menu">
-        <li><a href="menu.html">Menú de Comidas</a></li>
-        <li><a href="form_pedido.html">Hacer un Pedido</a></li>
-        <li><a href="ofertas.html">Ofertas Especiales</a></li>
-      </ul>
+<html lang="es">
 
-      <div class="accesos-usuario">
-        <a href="login.html" class="btn-login">Iniciar Sesión</a>
-        <a href="registrar.html" class="btn-registro">Registrarse</a>
-      </div>
-    </nav>
-  </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | SaveFood</title>
+    <link rel="icon" type="image/svg+xml" href="resources/logo_mini.svg">
+    <link rel="stylesheet" href="styles.css">
+</head>
 
-  <main>
-    
-    <section class="hero-section">
-      <div class="hero-contenido">
-        <h1>¡Hola!<br>Bienvenido a SaveFood.</h1>
-        <p>
-          Salva comida deliciosa y cuida el planeta.<br>Conectamos a restaurantes locales 
-          con personas como tú para rescatar platillos frescos próximos a vencer, 
-          ofreciéndolos a precios muy accesibles para reducir el desperdicio de alimentos.
-        </p>
-        
-        <div class="botones-accion">
-          <a href="menu.html" class="btn-primario">Ver el Menú de Hoy</a>
-          <a href="form_pedido.html" class="btn-secundario">Armar mi Pedido</a>
+<body>
+
+    <!-- =========================================
+    SESIÓN 02 - Estructura de página (Header)
+    ========================================= -->
+
+    <header class="header-principal">
+        <nav class="navegacion">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="resources/logo_full.svg" alt="Logo SaveFood" class="logo-img">
+                </a>
+            </div>
+
+            <ul class="enlaces-menu">
+                <li><a href="menu.html">Menú de Comidas</a></li>
+                <li><a href="form_pedido.html">Hacer un Pedido</a></li>
+                <li><a href="ofertas.html">Ofertas Especiales</a></li>
+                <li><a href="pedidos.html">Mis Pedidos</a></li>
+            </ul>
+
+            <div class="accesos-usuario">
+                <a href="login.html" class="btn-login">Iniciar Sesión</a>
+                <a href="registrar.html" class="btn-registro">Registrarse</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- =========================================
+    SESIÓN 02 - Contenido principal (Main)
+    ========================================= -->
+
+    <main>
+
+        <!-- =========================================
+        SESIÓN 02 - Hero Section (con animación fadeIn)
+        ========================================= -->
+
+        <section class="hero-section">
+            <div class="hero-contenido">
+                <h1>¡Hola!<br>Bienvenido a <strong>SaveFood</strong>.</h1>
+                <p>
+                    <strong>Salva</strong> comida deliciosa y <strong>cuida</strong> el planeta.<br>
+                    Conectamos a restaurantes locales con personas como tú para rescatar
+                    platillos frescos próximos a vencer, ofreciéndolos a precios muy accesibles
+                    para reducir el desperdicio de alimentos.
+                </p>
+
+                <div class="botones-accion">
+                    <a href="menu.html" class="btn-primario">Ver el Menú de Hoy</a>
+                    <a href="form_pedido.html" class="btn-secundario">Armar mi Pedido</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================
+        SESIÓN 08 - Grid Layout (Cómo funciona)
+        ========================================= -->
+
+        <section class="como-funciona-section">
+            <h2>Únete al rescate en 3 simples pasos</h2>
+
+            <div class="pasos-contenedor">
+                <article class="paso-tarjeta">
+                    <span class="numero-paso">1</span>
+                    <p>Los restaurantes publican sus excedentes de comida en perfecto estado.</p>
+                </article>
+
+                <article class="paso-tarjeta">
+                    <span class="numero-paso">2</span>
+                    <p>Tú exploras nuestras ofertas y eliges tus platos favoritos con descuento.</p>
+                </article>
+
+                <article class="paso-tarjeta">
+                    <span class="numero-paso">3</span>
+                    <p>Disfrutas de una gran comida mientras ayudas a evitar el desperdicio.</p>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =========================================
+    SESIÓN 02 - Pie de página (Footer)
+    ========================================= -->
+
+    <footer class="footer-principal">
+        <div class="footer-contenedor">
+
+            <div class="footer-info">
+                <h3>SaveFood</h3>
+                <p>Dándole una <strong>segunda oportunidad</strong> a la buena comida.</p>
+            </div>
+
+            <div class="footer-contacto">
+                <p>📍 Arequipa, Perú</p>
+                <p>✉️ hola@savefood.pe</p>
+            </div>
+
+            <div class="footer-redes">
+                <p>Síguenos para más ofertas:</p>
+                <a href="#">📷 @SaveFood_AQP</a> | <a href="#">📘 Savefood</a>
+            </div>
+
         </div>
-      </div>
-    </section>
 
-    <section class="como-funciona-section">
-      <h2>Únete al rescate en 3 simples pasos</h2>
-      
-      <div class="pasos-contenedor">
-        <article class="paso-tarjeta">
-          <span class="numero-paso">1</span>
-          <p>Los restaurantes publican sus excedentes de comida en perfecto estado.</p>
-        </article>
-        
-        <article class="paso-tarjeta">
-          <span class="numero-paso">2</span>
-          <p>Tú exploras nuestras ofertas y eliges tus platos favoritos con descuento.</p>
-        </article>
-        
-        <article class="paso-tarjeta">
-          <span class="numero-paso">3</span>
-          <p>Disfrutas de una gran comida mientras ayudas a evitar el desperdicio.</p>
-        </article>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="footer-principal">
-    <div class="footer-contenedor">
-      
-      <div class="footer-info">
-        <h3>SaveFood</h3>
-        <p>Dándole una segunda oportunidad a la buena comida.</p>
-      </div>
-      
-      <div class="footer-contacto">
-        <p>📍 Arequipa, Arequipa</p>
-        <p>✉️ hola@savefood.pe</p>
-      </div>
-      
-      <div class="footer-redes">
-        <p>Síguenos para más ofertas:</p>
-        <a href="#">📷 @SaveFood_AQP</a> | <a href="#">📘 Savefood</a>
-      </div>
-      
-    </div>
-    
-    <div class="footer-copyright">
-      <p>&copy; 2026 SaveFood. Proyecto de Taller de Programación.</p>
-    </div>
-  </footer>
+        <div class="footer-copyright">
+            <p>&copy; 2026 SaveFood. Proyecto Final - Desarrollo Web.</p>
+        </div>
+    </footer>
 
 </body>
+
 </html>

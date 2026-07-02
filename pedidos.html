@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Historial de pedidos realizados en SaveFood. Consulta el estado de tus compras.">
+
+    <title>Pedidos Realizados | SaveFood</title>
+
+    <link rel="icon" type="image/svg+xml" href="resources/logo_mini.svg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+         SESIÓN 02 - ENCABEZADO DEL SITIO
+    ========================================= -->
+
+    <header class="header-principal">
+
+        <nav class="navegacion">
+
+            <div class="logo">
+                <a href="index.html">
+                    <img src="resources/logo_full.svg"
+                        alt="Logo SaveFood"
+                        class="logo-img">
+                </a>
+            </div>
+
+            <ul class="enlaces-menu">
+                <li><a href="menu.html">Menú de Comidas</a></li>
+                <li><a href="form_pedido.html">Hacer un Pedido</a></li>
+                <li><a href="ofertas.html">Ofertas Especiales</a></li>
+                <li><a href="pedidos.html" class="pagina-activa">Mis Pedidos</a></li>
+            </ul>
+
+            <div class="accesos-usuario">
+                <a href="login.html" class="btn-login">Iniciar Sesión</a>
+                <a href="registrar.html" class="btn-registro">Registrarse</a>
+            </div>
+
+        </nav>
+
+    </header>
+
+    <!-- =========================================
+         SESIÓN 08 - Grid Layout
+         SESIÓN 04 - TABLA DE PEDIDOS
+    ========================================= -->
+
+    <main class="contenido-principal grid-layout">
+
+        <section class="pedidos-section">
+
+            <div class="contenedor">
+
+                <div class="pedidos-encabezado">
+                    <h1>📋 <strong>Historial</strong> de Pedidos</h1>
+                    <p>
+                        Consulta el <strong>estado</strong> de tus pedidos realizados en SaveFood.
+                        Aquí encontrarás el <strong>detalle</strong> de cada compra.
+                    </p>
+                </div>
+
+                <div class="tabla-contenedor">
+
+                    <table class="tabla-pedidos">
+
+                        <thead>
+                            <tr>
+                                <th>N° Pedido</th>
+                                <th>Cliente</th>
+                                <th>Productos</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td data-label="N° Pedido">#001</td>
+                                <td data-label="Cliente">María González</td>
+                                <td data-label="Productos">Tacos al Pastor, Burger Clásica</td>
+                                <td data-label="Cantidad">3</td>
+                                <td data-label="Total">S/ 42.89</td>
+                                <td data-label="Estado">
+                                    <span class="estado estado-enviado">✅ Enviado</span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td data-label="N° Pedido">#002</td>
+                                <td data-label="Cliente">Carlos Ramírez</td>
+                                <td data-label="Productos">Muestra de Sushi</td>
+                                <td data-label="Cantidad">2</td>
+                                <td data-label="Total">S/ 36.00</td>
+                                <td data-label="Estado">
+                                    <span class="estado estado-proceso">⏳ En Proceso</span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td data-label="N° Pedido">#003</td>
+                                <td data-label="Cliente">Ana Lucía Torres</td>
+                                <td data-label="Productos">Pack Familiar: Pollo a la Brasa</td>
+                                <td data-label="Cantidad">1</td>
+                                <td data-label="Total">S/ 30.00</td>
+                                <td data-label="Estado">
+                                    <span class="estado estado-preparando">🔄 Preparando</span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td data-label="N° Pedido">#004</td>
+                                <td data-label="Cliente">Jorge Mendoza</td>
+                                <td data-label="Productos">Menú Ejecutivo: Lomo Saltado</td>
+                                <td data-label="Cantidad">4</td>
+                                <td data-label="Total">S/ 32.00</td>
+                                <td data-label="Estado">
+                                    <span class="estado estado-enviado">✅ Enviado</span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td data-label="N° Pedido">#005</td>
+                                <td data-label="Cliente">Laura Fernández</td>
+                                <td data-label="Productos">Caja Sorpresa de Postres, Tacos al Pastor</td>
+                                <td data-label="Cantidad">2</td>
+                                <td data-label="Total">S/ 24.90</td>
+                                <td data-label="Estado">
+                                    <span class="estado estado-proceso">⏳ En Proceso</span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td data-label="N° Pedido">#006</td>
+                                <td data-label="Cliente">Roberto Sánchez</td>
+                                <td data-label="Productos">Burger Clásica, Muestra de Sushi</td>
+                                <td data-label="Cantidad">3</td>
+                                <td data-label="Total">S/ 29.99</td>
+                                <td data-label="Estado">
+                                    <span class="estado estado-preparando">🔄 Preparando</span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="pedidos-acciones">
+                    <a href="menu.html" class="btn-primario">🍽️ Volver al Menú</a>
+                    <a href="index.html" class="btn-secundario">🏠 Volver al Inicio</a>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- =========================================
+         SESIÓN 02 - PIE DE PÁGINA (unificado)
+    ========================================= -->
+
+    <footer class="footer-principal">
+
+        <div class="footer-contenedor">
+
+            <div class="footer-info">
+                <h3>SaveFood</h3>
+                <p>Dándole una <strong>segunda oportunidad</strong> a la buena comida.</p>
+            </div>
+
+            <div class="footer-contacto">
+                <p>📍 Arequipa, Perú</p>
+                <p>📞 +51 999 999 999</p>
+                <p>✉️ hola@savefood.pe</p>
+            </div>
+
+            <div class="footer-redes">
+                <p><a href="#">Facebook</a></p>
+                <p><a href="#">Instagram</a></p>
+                <p><a href="#">TikTok</a></p>
+            </div>
+
+        </div>
+
+        <div class="footer-copyright">
+            <p>&copy; 2026 SaveFood. Proyecto Final - Desarrollo Web.</p>
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

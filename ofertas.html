@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Descubre las mejores ofertas de SaveFood y aprovecha descuentos en alimentos de calidad antes de que se agoten.">
+
+    <title>Ofertas Especiales | SaveFood</title>
+
+    <link rel="icon" type="image/svg+xml" href="resources/logo_mini.svg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+         SESIÓN 02 - ENCABEZADO DEL SITIO
+    ========================================= -->
+
+    <header class="header-principal">
+
+        <nav class="navegacion">
+
+            <div class="logo">
+                <a href="index.html">
+                    <img src="resources/logo_full.svg"
+                        alt="Logo SaveFood"
+                        class="logo-img">
+                </a>
+            </div>
+
+            <ul class="enlaces-menu">
+                <li><a href="menu.html">Menú de Comidas</a></li>
+                <li><a href="form_pedido.html">Hacer un Pedido</a></li>
+                <li><a href="ofertas.html" class="pagina-activa">Ofertas Especiales</a></li>
+                <li><a href="pedidos.html">Mis Pedidos</a></li>
+            </ul>
+
+            <div class="accesos-usuario">
+
+                <div class="carrito-icono">
+                    🛒
+                    <span id="contador-carrito" class="contador-carrito">0</span>
+                </div>
+
+                <a href="login.html" class="btn-login">Iniciar Sesión</a>
+                <a href="registrar.html" class="btn-registro">Registrarse</a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <!-- =========================================
+         SESIÓN 08 - Grid Layout (main con grid de una columna)
+    ========================================= -->
+
+    <main class="contenido-principal grid-layout">
+
+        <section class="hero-section">
+
+            <div class="contenedor">
+
+                <div class="ofertas-encabezado">
+                    <h1><strong>Ofertas Flash</strong> del Día</h1>
+                    <p><strong>Rescata</strong> estos platillos con descuentos especiales antes de que se agoten.</p>
+                </div>
+
+                <div class="grid-ofertas">
+
+                    <!-- OFERTA 1 -->
+                    <article class="tarjeta-oferta">
+
+                        <div class="indicador-urgencia">⏳ ¡Últimas 2 unidades!</div>
+
+                        <div class="oferta-contenido">
+
+                            <h3 class="producto-nombre">Pack Familiar: Pollo a la Brasa</h3>
+                            <p class="producto-restaurante">Pollería El Carbón</p>
+
+                            <div class="producto-precios">
+                                <span class="precio-original">S/ 65.00</span>
+                                <span class="precio-descuento">S/ 30.00</span>
+                            </div>
+
+                            <button class="btn-primario btn-ancho-completo"
+                                    onclick="agregarAlCarrito('Pack Familiar: Pollo a la Brasa', 30.00)">
+                                Añadir al Pedido
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                    <!-- OFERTA 2 -->
+                    <article class="tarjeta-oferta">
+
+                        <div class="indicador-urgencia urgencia-alta">🔥 ¡Vence en 45 minutos!</div>
+
+                        <div class="oferta-contenido">
+
+                            <h3 class="producto-nombre">Menú Ejecutivo: Lomo Saltado</h3>
+                            <p class="producto-restaurante">Sazón Criolla</p>
+
+                            <div class="producto-precios">
+                                <span class="precio-original">S/ 18.00</span>
+                                <span class="precio-descuento">S/ 8.00</span>
+                            </div>
+
+                            <button class="btn-primario btn-ancho-completo"
+                                    onclick="agregarAlCarrito('Menú Ejecutivo: Lomo Saltado', 8.00)">
+                                Añadir al Pedido
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                    <!-- OFERTA 3 -->
+                    <article class="tarjeta-oferta">
+
+                        <div class="indicador-urgencia">⏳ ¡Última unidad!</div>
+
+                        <div class="oferta-contenido">
+
+                            <h3 class="producto-nombre">Caja Sorpresa de Postres</h3>
+                            <p class="producto-restaurante">Pastelería Dulce Pecado</p>
+
+                            <div class="producto-precios">
+                                <span class="precio-original">S/ 25.00</span>
+                                <span class="precio-descuento">S/ 10.00</span>
+                            </div>
+
+                            <button class="btn-primario btn-ancho-completo"
+                                    onclick="agregarAlCarrito('Caja Sorpresa de Postres', 10.00)">
+                                Añadir al Pedido
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- =========================================
+         SESIÓN 02 - PIE DE PÁGINA (unificado)
+    ========================================= -->
+
+    <footer class="footer-principal">
+
+        <div class="footer-contenedor">
+
+            <div class="footer-info">
+                <h3>SaveFood</h3>
+                <p>Dándole una <strong>segunda oportunidad</strong> a la buena comida.</p>
+            </div>
+
+            <div class="footer-contacto">
+                <p>📍 Arequipa, Perú</p>
+                <p>✉️ hola@savefood.pe</p>
+            </div>
+
+            <div class="footer-redes">
+                <p>Síguenos para más ofertas:</p>
+                <a href="#">📷 @SaveFood_AQP</a> |
+                <a href="#">📘 SaveFood</a>
+            </div>
+
+        </div>
+
+        <div class="footer-copyright">
+            <p>&copy; 2026 SaveFood. Proyecto Final - Desarrollo Web.</p>
+        </div>
+
+    </footer>
+
+    <script src="menu-script.js" defer></script>
+
+</body>
+
+</html>

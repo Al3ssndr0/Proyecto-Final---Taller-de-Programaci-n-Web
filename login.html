@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Inicia sesión en SaveFood para acceder al menú, ofertas y realizar pedidos.">
+
+    <title>Iniciar Sesión | SaveFood</title>
+
+    <link rel="icon" type="image/svg+xml" href="resources/logo_mini.svg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+         SESIÓN 02 - ENCABEZADO DEL SITIO
+    ========================================= -->
+
+    <header class="header-principal">
+
+        <nav class="navegacion">
+
+            <div class="logo">
+                <a href="index.html">
+                    <img src="resources/logo_full.svg"
+                        class="logo-img"
+                        alt="Logo SaveFood">
+                </a>
+            </div>
+
+            <ul class="enlaces-menu">
+                <li><a href="menu.html">Menú</a></li>
+                <li><a href="ofertas.html">Ofertas</a></li>
+                <li><a href="form_pedido.html">Pedidos</a></li>
+                <li><a href="pedidos.html">Mis Pedidos</a></li>
+            </ul>
+
+        </nav>
+
+    </header>
+
+    <!-- =========================================
+         SESIÓN 03 / 10 - FORMULARIO DE INICIO DE SESIÓN
+    ========================================= -->
+
+    <!-- Eliminada la clase grid-layout para mantener el centrado vertical -->
+    <main class="contenedor-login">
+
+        <div class="card-login">
+
+            <h1>Bienvenido</h1>
+
+            <p>
+                Inicia sesión para continuar utilizando SaveFood.
+            </p>
+
+            <form id="loginForm">
+
+                <label for="usuario">Usuario</label>
+
+                <input
+                    type="text"
+                    id="usuario"
+                    name="usuario"
+                    placeholder="Ingrese su usuario"
+                    maxlength="30"
+                    required>
+
+                <label for="clave">Contraseña</label>
+
+                <input
+                    type="password"
+                    id="clave"
+                    name="clave"
+                    placeholder="Ingrese su contraseña"
+                    maxlength="30"
+                    required>
+
+                <button
+                    type="submit"
+                    class="btn-login-form">
+
+                    Iniciar Sesión
+
+                </button>
+
+            </form>
+
+            <p class="texto-login">
+
+                ¿No tienes una cuenta?
+
+                <a href="registrar.html">
+
+                    Regístrate aquí
+
+                </a>
+
+            </p>
+
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
