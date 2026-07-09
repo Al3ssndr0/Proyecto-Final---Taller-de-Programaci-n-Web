@@ -1,16 +1,20 @@
 /* ============================================
-   SESIÓN 12 - Arreglos (Carrito de compras)
-   =========================================== */
+   MENU-SCRIPT.JS
+   SaveFood
+============================================ */
 
-// Clave para guardar en sessionStorage
+const API_URL = "http://localhost:3000";
 const CLAVE_CARRITO = "savefood_carrito";
 
+let carrito = [];
+
 /* ============================================
-   SESIÓN 12 - Cargar carrito desde sessionStorage
-   =========================================== */
+   CARRITO
+============================================ */
 
 function cargarCarrito() {
-    const datos = sessionStorage.getItem(CLAVE_CARRITO);
+    const datos = localStorage.getItem(CLAVE_CARRITO);
+
     if (datos) {
         carrito = JSON.parse(datos);
     } else {
@@ -18,169 +22,367 @@ function cargarCarrito() {
     }
 }
 
-// Cargar el carrito al iniciar el script
-cargarCarrito();
-
-/* ============================================
-   SESIÓN 12 - Guardar carrito en sessionStorage
-   =========================================== */
-
 function guardarCarrito() {
-    sessionStorage.setItem(CLAVE_CARRITO, JSON.stringify(carrito));
+    localStorage.setItem(
+        CLAVE_CARRITO,
+        JSON.stringify(carrito)
+    );
 }
 
+cargarCarrito();
+
+
 /* ============================================
-   SESIÓN 11 - Función para agregar productos
-   =========================================== */
+   AGREGAR PRODUCTO
+============================================ */
 
-function agregarAlCarrito(nombre, precio) {
-    // Buscar si el producto ya está en el carrito
-    let productoExistente = null;
-    for (let i = 0; i < carrito.length; i++) {
-        if (carrito[i].nombre === nombre) {
-            productoExistente = carrito[i];
-            break;
-        }
-    }
+function agregarAlCarrito(id_producto, nombre, precio) {
+    let encontrado = carrito.find(item => item.id_producto == id_producto);
 
-    if (productoExistente) {
-        // Si ya existe, aumentar la cantidad
-        productoExistente.cantidad++;
+    if (encontrado) {
+        encontrado.cantidad++;
     } else {
-        // Si no existe, agregarlo nuevo
         carrito.push({
+            id_producto: id_producto,
             nombre: nombre,
-            precio: precio,
+            precio: Number(precio),
             cantidad: 1
         });
     }
 
-    // Guardar en sessionStorage
     guardarCarrito();
-
-    // Actualizar el contador visual
     actualizarContadorCarrito();
 
-    // Mostrar mensaje de confirmación
-    alert(nombre + " añadido al carrito.");
+    alert(nombre + " agregado al carrito.");
 }
 
+
 /* ============================================
-   SESIÓN 13 - Actualizar contador en el DOM
-   =========================================== */
+   CONTADOR
+============================================ */
 
 function actualizarContadorCarrito() {
-    let totalItems = 0;
-
-    for (let i = 0; i < carrito.length; i++) {
-        totalItems = totalItems + carrito[i].cantidad;
-    }
+    let total = 0;
+    carrito.forEach(item => {
+        total += item.cantidad;
+    });
 
     const contador = document.getElementById("contador-carrito");
+
     if (contador) {
-        contador.textContent = totalItems;
+        contador.textContent = total;
     }
 }
 
+
 /* ============================================
-   SESIÓN 12 - Calcular total del carrito
-   =========================================== */
+   TOTAL
+============================================ */
 
 function calcularTotalCarrito() {
     let total = 0;
 
-    for (let i = 0; i < carrito.length; i++) {
-        total = total + (carrito[i].precio * carrito[i].cantidad);
-    }
+    carrito.forEach(item => {
+        total += item.precio * item.cantidad;
+    });
 
     return total.toFixed(2);
 }
 
-/* ============================================
-   SESIÓN 13 - Renderizar carrito en form_pedido.html
-   =========================================== */
-
-function renderizarCarrito() {
-    const contenedor = document.getElementById("resumen-carrito");
-
-    if (!contenedor) {
-        return;
-    }
-
-    // Recargar desde sessionStorage por si hubo cambios en otra pestaña (opcional)
-    cargarCarrito();
-
-    if (carrito.length === 0) {
-        contenedor.classList.remove("visible");
-        contenedor.innerHTML = `
-            <p class="carrito-vacio">
-                🛒 Tu carrito está vacío. 
-                <a href="menu.html">Explora nuestro menú</a> para agregar productos.
-            </p>
-        `;
-        return;
-    }
-
-    contenedor.classList.add("visible");
-
-    let html = `
-        <h3>🧾 Resumen de tu pedido</h3>
-        <ul class="lista-carrito">
-    `;
-
-    for (let i = 0; i < carrito.length; i++) {
-        const item = carrito[i];
-        const subtotal = (item.precio * item.cantidad).toFixed(2);
-        html += `
-            <li class="item-carrito">
-                <span class="item-nombre">${item.nombre}</span>
-                <span class="item-cantidad">x${item.cantidad}</span>
-                <span class="item-precio">S/ ${subtotal}</span>
-            </li>
-        `;
-    }
-
-    const total = calcularTotalCarrito();
-    html += `
-        </ul>
-        <div class="total-carrito">
-            <strong>Total a pagar:</strong> S/ ${total}
-        </div>
-        <p class="carrito-nota">
-            ⚡ Completa el formulario para confirmar tu pedido.
-        </p>
-    `;
-
-    contenedor.innerHTML = html;
-}
 
 /* ============================================
-   SESIÓN 11 - Vaciar carrito (después de pedido)
-   =========================================== */
+   VACIAR
+============================================ */
 
 function vaciarCarrito() {
     carrito = [];
     guardarCarrito();
     actualizarContadorCarrito();
+}
+
+
+/* ============================================
+   CARGAR PRODUCTOS MYSQL
+============================================ */
+
+async function cargarProductosDesdeBD() {
+
+    try {
+
+        const response = await fetch(API_URL + "/productos");
+
+        const productos = await response.json();
+
+        crearCards(productos);
+
+        crearTabla(productos);
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+/* ============================================
+   CREAR TARJETAS DESDE MYSQL
+============================================ */
+
+function crearCards(productos) {
+
+    const contenedor = document.getElementById("contenedor-menu");
+    if (!contenedor) return;
+    contenedor.innerHTML = "";
+
+    productos.forEach(producto => {
+        contenedor.innerHTML += `
+        <article class="card">
+            <img
+                src="${producto.Ruta_Imagen}"
+                alt="${producto.Nombre_Producto}">
+
+            <div class="contenido">
+                <h2>${producto.Nombre_Producto}</h2>
+                <p class="descripcion">${producto.Descripcion}</p>
+
+                <p class="precio-original">
+                    S/ ${parseFloat(producto.Precio_Original).toFixed(2)}
+                </p>
+
+                <p class="precio-descuento">
+                    S/ ${parseFloat(producto.Precio_Descuento).toFixed(2)}
+                </p>
+
+                <button
+                    class="btn-animado"
+                    onclick="agregarAlCarrito(
+                        ${producto.ID_Producto},
+                        '${producto.Nombre_Producto.replace(/'/g, "\\'")}',
+                        ${producto.Precio_Descuento}
+                    )">
+                    Añadir al carrito
+                </button>
+            </div>
+        </article>
+        `;
+    });
+}
+
+
+/* ============================================
+   CREAR TABLA DESDE MYSQL
+============================================ */
+
+function crearTabla(productos) {
+    const tabla = document.getElementById("tabla-productos");
+    if (!tabla) return;
+    tabla.innerHTML = "";
+
+    productos.forEach(producto => {
+        tabla.innerHTML += `
+        <tr>
+            <td>${producto.Nombre_Producto}</td>
+
+            <td>${producto.Descripcion}</td>
+
+            <td>S/ ${parseFloat(producto.Precio_Original).toFixed(2)}</td>
+
+            <td>S/ ${parseFloat(producto.Precio_Descuento).toFixed(2)}</td>
+
+            <td>
+                <button
+                    class="btn-animado btn-tabla"
+                    onclick="agregarAlCarrito(
+                        ${producto.ID_Producto},
+                        '${producto.Nombre_Producto.replace(/'/g, "\\'")}',
+                        ${producto.Precio_Descuento}
+                    )">
+                    Añadir
+                </button>
+            </td>
+        </tr>
+        `;
+    });
+}
+/* ============================================
+   RENDERIZAR CARRITO
+============================================ */
+/*
+function renderizarCarrito() {
 
     const contenedor = document.getElementById("resumen-carrito");
-    if (contenedor) {
-        renderizarCarrito();
+
+    if (!contenedor) return;
+    cargarCarrito();
+
+    if (carrito.length === 0) {
+        contenedor.innerHTML = `
+            <p class="carrito-vacio">
+                🛒 Tu carrito está vacío.
+            </p>
+        `;
+        return;
+    }
+
+    let html = `
+        <h3>🛒 Resumen del Pedido</h3>
+        <ul class="lista-carrito">
+    `;
+
+    carrito.forEach(item => {
+        html += `
+            <li>
+                <strong>${item.nombre}</strong>
+                <br>
+                Cantidad:
+                ${item.cantidad}
+                <br>
+                Subtotal:
+                S/ ${(item.precio * item.cantidad).toFixed(2)}
+            </li>
+        `;
+    });
+
+    html += `
+        </ul>
+        <hr>
+        <h3>
+            Total: S/ ${calcularTotalCarrito()}
+        </h3>
+    `;
+    contenedor.innerHTML = html;
+}
+*/
+function renderizarCarrito() {
+    console.log("Paso 1: Iniciando renderizarCarrito...");
+
+    const contenedor = document.getElementById("resumen-carrito");
+    console.log("Paso 2: ¿Encontró el contenedor HTML?", contenedor);
+
+    if (!contenedor) {
+        console.error("Paso 3: ERROR. No se encontró el div 'resumen-carrito' en el HTML. Abortando.");
+        return;
+    }
+
+    cargarCarrito();
+    console.log("Paso 4: Platos cargados en la memoria:", carrito);
+
+    if (carrito.length === 0) {
+        console.log("Paso 5: El carrito está vacío. Mostrando mensaje.");
+        contenedor.innerHTML = `
+            <p class="carrito-vacio">
+                🛒 Tu carrito está vacío.
+            </p>
+        `;
+        return;
+    }
+
+    let html = `
+        <h3>🛒 Resumen del Pedido</h3>
+        <ul class="lista-carrito">
+    `;
+
+    carrito.forEach(item => {
+        html += `
+            <li>
+                <strong>${item.nombre}</strong> <br>
+                Cantidad: ${item.cantidad} <br>
+                Subtotal: S/ ${(item.precio * item.cantidad).toFixed(2)}
+            </li>
+        `;
+    });
+
+    html += `
+        </ul>
+        <hr>
+        <h3>Total: S/ ${calcularTotalCarrito()}</h3>
+    `;
+
+    contenedor.innerHTML = html;
+    console.log("Paso 6: ¡Éxito! HTML inyectado en la pantalla.");
+}
+
+/* DROPDOWN CARRITO */
+// Función para mostrar/ocultar el desplegable
+function toggleCarritoDesplegable() {
+    const dropdown = document.getElementById("dropdown-carrito");
+    
+    // Si estaba oculto por el estilo inline (display:none), lo quitamos
+    if (dropdown.style.display === "none") {
+        dropdown.style.display = "block";
+    }
+
+    // Ahora hacemos el toggle de la clase para la animación
+    dropdown.classList.toggle("mostrar");
+    
+    if (dropdown.classList.contains("mostrar")) {
+        renderizarDropdown(); 
     }
 }
 
-/* ============================================
-   SESIÓN 13 - Inicializar contador al cargar la página
-   =========================================== */
+// Función para dibujar los productos en el dropdown
+function renderizarDropdown() {
+    const contenido = document.getElementById("contenido-dropdown");
+    cargarCarrito(); // Aseguramos tener los datos frescos
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Cargar carrito desde sessionStorage
-    cargarCarrito();
+    if (carrito.length === 0) {
+        contenido.innerHTML = "<p>Carrito vacío</p>";
+        return;
+    }
+
+    let html = "<ul>";
+    carrito.forEach(item => {
+        html += `<li>${item.nombre} (x${item.cantidad}) - S/ ${(item.precio * item.cantidad).toFixed(2)}</li>`;
+    });
+    html += "</ul>";
+    html += `<p><strong>Total: S/ ${calcularTotalCarrito()}</strong></p>`;
+    
+    contenido.innerHTML = html;
+}
+
+/* ============================================
+   OFERTAS
+============================================ */
+
+async function cargarOfertasDesdeBD() {
+
+    try {
+
+        const response = await fetch(API_URL + "/ofertas");
+
+        const productos = await response.json();
+
+        crearCards(productos);
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* ============================================
+   INICIAR
+============================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
     actualizarContadorCarrito();
 
-    // Si estamos en form_pedido.html, renderizar el carrito
-    const resumen = document.getElementById("resumen-carrito");
-    if (resumen) {
+    if (document.getElementById("resumen-carrito")) {
         renderizarCarrito();
+    }
+
+    if (document.getElementById("contenedor-menu")) {
+        cargarProductosDesdeBD();
+    }
+
+    if (document.getElementById("contenedor-ofertas")) {
+        cargarOfertasDesdeBD();
     }
 });

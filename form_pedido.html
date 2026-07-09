@@ -31,6 +31,9 @@
                 </a>
             </div>
 
+            <input type="checkbox" id="menu-check" class="menu-check">
+            <label for="menu-check" class="menu-hamburguesa">☰</label>
+
             <ul class="enlaces-menu">
                 <li><a href="menu.html">Menú de Comidas</a></li>
                 <li><a href="form_pedido.html" class="pagina-activa">Hacer un Pedido</a></li>
@@ -40,9 +43,17 @@
 
             <div class="accesos-usuario">
 
-                <div class="carrito-icono">
-                    🛒
-                    <span id="contador-carrito" class="contador-carrito">0</span>
+                <div class="carrito-contenedor-header">
+                    <div class="carrito-icono" id="icono-carrito" onclick="toggleCarritoDesplegable()">
+                        🛒
+                        <span id="contador-carrito" class="contador-carrito">0</span>
+                    </div>
+
+                    <div id="dropdown-carrito" class="dropdown-carrito" style="display:none;">
+                        <div id="contenido-dropdown">
+                            </div>
+                        <a href="form_pedido.html" class="btn-primario">Ir a Pagar</a>
+                    </div>
                 </div>
 
                 <a href="login.html" class="btn-login">Iniciar Sesión</a>
@@ -102,7 +113,7 @@
                             <input type="text" id="direccion" name="direccion" maxlength="100"
                                    placeholder="Ej: Av. Goyeneche 123, Referencia frente al hospital" required>
                         </div>
-
+                        <!--
                         <div class="form-group">
                             <label for="plato">¿Qué plato te interesa?</label>
                             <select id="plato" name="plato" required>
@@ -112,7 +123,7 @@
                                 <option value="otro">Sorpréndeme</option>
                             </select>
                         </div>
-
+                        -->
                         <div class="form-group">
                             <label for="cantidad">Cantidad de personas</label>
                             <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="1" required>
@@ -176,24 +187,34 @@
 
     </footer>
 
+    <!-- =========================================
+         SESIÓN 11/12/13 - JavaScript del carrito y pedido
+    ========================================= -->
+
     <script src="menu-script.js" defer></script>
 
     <script>
+        // SESIÓN 13 - Esperar a que cargue el DOM para renderizar el carrito
+        /*
         document.addEventListener("DOMContentLoaded", function() {
             renderizarCarrito();
         });
-
+        */
+        // SESIÓN 12 / 13 - Manejar el envío del formulario de pedido
         const pedidoForm = document.getElementById("pedidoForm");
 
         if (pedidoForm) {
-            pedidoForm.addEventListener("submit", function(e) {
+            pedidoForm.addEventListener("submit", async function(e) {
                 e.preventDefault();
 
                 const nombre = document.getElementById("nombre").value.trim();
                 const email = document.getElementById("email").value.trim();
                 const telefono = document.getElementById("telefono").value.trim();
                 const direccion = document.getElementById("direccion").value.trim();
+                const cantidad_personas = document.getElementById("cantidad").value || 1;
+                const notas = document.getElementById("notas").value.trim();
 
+                // Validaciones locales
                 if (nombre === "" || email === "" || telefono === "" || direccion === "") {
                     alert("Por favor, complete todos los campos obligatorios.");
                     return;
@@ -204,27 +225,50 @@
                     return;
                 }
 
+                // Obtener ID del usuario logueado (si existe)
+                const id_usuario = sessionStorage.getItem("savefood_id_usuario") || null;
+
+                // Preparar productos para enviar
+                const productos = carrito.map(item => ({
+                    id_producto: item.id_producto || null,
+                    cantidad: item.cantidad,
+                    subtotal: (item.precio * item.cantidad).toFixed(2)
+                }));
+
                 const total = calcularTotalCarrito();
 
-                let mensaje = "¡Pedido confirmado!\n\n";
-                mensaje += "Cliente: " + nombre + "\n";
-                mensaje += "Correo: " + email + "\n";
-                mensaje += "Teléfono: " + telefono + "\n";
-                mensaje += "Dirección: " + direccion + "\n\n";
-                mensaje += "Productos:\n";
+                const data = {
+                    id_usuario: id_usuario,
+                    nombre: nombre,
+                    correo: email,
+                    telefono: telefono,
+                    direccion: direccion,
+                    cantidad_personas: cantidad_personas,
+                    notas: notas,
+                    total: total,
+                    productos: productos
+                };
 
-                for (let i = 0; i < carrito.length; i++) {
-                    const item = carrito[i];
-                    mensaje += "  - " + item.nombre + " x" + item.cantidad + " = S/ " + (item.precio * item.cantidad).toFixed(2) + "\n";
+                try {
+                    const response = await fetch("http://localhost:3000/pedido", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(data)
+                    });
+                    const result = await response.json();
+
+                    if (result.success) {
+                        alert("¡Pedido guardado correctamente! N° de pedido: " + result.idPedido);
+                        vaciarCarrito();
+                        pedidoForm.reset();
+                        renderizarCarrito();
+                    } else {
+                        alert("Error: " + result.mensaje);
+                    }
+                } catch (error) {
+                    alert("Error al conectar con el servidor. Asegúrate de que Node.js está corriendo.");
+                    console.error(error);
                 }
-
-                mensaje += "\nTotal: S/ " + total;
-
-                alert(mensaje);
-
-                vaciarCarrito();
-                pedidoForm.reset();
-                renderizarCarrito();
             });
         }
     </script>

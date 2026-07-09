@@ -31,6 +31,9 @@
                 </a>
             </div>
 
+            <input type="checkbox" id="menu-check" class="menu-check">
+            <label for="menu-check" class="menu-hamburguesa">☰</label>
+
             <ul class="enlaces-menu">
                 <li><a href="menu.html">Menú de Comidas</a></li>
                 <li><a href="form_pedido.html">Hacer un Pedido</a></li>
@@ -40,9 +43,17 @@
 
             <div class="accesos-usuario">
 
-                <div class="carrito-icono">
-                    🛒
-                    <span id="contador-carrito" class="contador-carrito">0</span>
+                <div class="carrito-contenedor-header">
+                    <div class="carrito-icono" id="icono-carrito" onclick="toggleCarritoDesplegable()">
+                        🛒
+                        <span id="contador-carrito" class="contador-carrito">0</span>
+                    </div>
+
+                    <div id="dropdown-carrito" class="dropdown-carrito" style="display:none;">
+                        <div id="contenido-dropdown">
+                            </div>
+                        <a href="form_pedido.html" class="btn-primario">Ir a Pagar</a>
+                    </div>
                 </div>
 
                 <a href="login.html" class="btn-login">Iniciar Sesión</a>
@@ -69,7 +80,7 @@
                     <p><strong>Rescata</strong> estos platillos con descuentos especiales antes de que se agoten.</p>
                 </div>
 
-                <div class="grid-ofertas">
+                <div class="grid-ofertas" id="contenedor-ofertas">
 
                     <!-- OFERTA 1 -->
                     <article class="tarjeta-oferta">
@@ -87,7 +98,7 @@
                             </div>
 
                             <button class="btn-primario btn-ancho-completo"
-                                    onclick="agregarAlCarrito('Pack Familiar: Pollo a la Brasa', 30.00)">
+                                    onclick="agregarAlCarrito(13, 'Pack Familiar: Pollo a la Brasa', 30.00)">
                                 Añadir al Pedido
                             </button>
 
@@ -111,7 +122,7 @@
                             </div>
 
                             <button class="btn-primario btn-ancho-completo"
-                                    onclick="agregarAlCarrito('Menú Ejecutivo: Lomo Saltado', 8.00)">
+                                    onclick="agregarAlCarrito(14, 'Menú Ejecutivo: Lomo Saltado', 8.00)">
                                 Añadir al Pedido
                             </button>
 
@@ -135,7 +146,7 @@
                             </div>
 
                             <button class="btn-primario btn-ancho-completo"
-                                    onclick="agregarAlCarrito('Caja Sorpresa de Postres', 10.00)">
+                                    onclick="agregarAlCarrito(15, 'Caja Sorpresa de Postres', 10.00)">
                                 Añadir al Pedido
                             </button>
 

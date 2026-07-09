@@ -31,6 +31,9 @@
                 </a>
             </div>
 
+            <input type="checkbox" id="menu-check" class="menu-check">
+            <label for="menu-check" class="menu-hamburguesa">☰</label>
+
             <ul class="enlaces-menu">
                 <li><a href="menu.html">Menú de Comidas</a></li>
                 <li><a href="form_pedido.html">Hacer un Pedido</a></li>
@@ -81,74 +84,8 @@
                             </tr>
                         </thead>
 
-                        <tbody>
-
-                            <tr>
-                                <td data-label="N° Pedido">#001</td>
-                                <td data-label="Cliente">María González</td>
-                                <td data-label="Productos">Tacos al Pastor, Burger Clásica</td>
-                                <td data-label="Cantidad">3</td>
-                                <td data-label="Total">S/ 42.89</td>
-                                <td data-label="Estado">
-                                    <span class="estado estado-enviado">✅ Enviado</span>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td data-label="N° Pedido">#002</td>
-                                <td data-label="Cliente">Carlos Ramírez</td>
-                                <td data-label="Productos">Muestra de Sushi</td>
-                                <td data-label="Cantidad">2</td>
-                                <td data-label="Total">S/ 36.00</td>
-                                <td data-label="Estado">
-                                    <span class="estado estado-proceso">⏳ En Proceso</span>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td data-label="N° Pedido">#003</td>
-                                <td data-label="Cliente">Ana Lucía Torres</td>
-                                <td data-label="Productos">Pack Familiar: Pollo a la Brasa</td>
-                                <td data-label="Cantidad">1</td>
-                                <td data-label="Total">S/ 30.00</td>
-                                <td data-label="Estado">
-                                    <span class="estado estado-preparando">🔄 Preparando</span>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td data-label="N° Pedido">#004</td>
-                                <td data-label="Cliente">Jorge Mendoza</td>
-                                <td data-label="Productos">Menú Ejecutivo: Lomo Saltado</td>
-                                <td data-label="Cantidad">4</td>
-                                <td data-label="Total">S/ 32.00</td>
-                                <td data-label="Estado">
-                                    <span class="estado estado-enviado">✅ Enviado</span>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td data-label="N° Pedido">#005</td>
-                                <td data-label="Cliente">Laura Fernández</td>
-                                <td data-label="Productos">Caja Sorpresa de Postres, Tacos al Pastor</td>
-                                <td data-label="Cantidad">2</td>
-                                <td data-label="Total">S/ 24.90</td>
-                                <td data-label="Estado">
-                                    <span class="estado estado-proceso">⏳ En Proceso</span>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td data-label="N° Pedido">#006</td>
-                                <td data-label="Cliente">Roberto Sánchez</td>
-                                <td data-label="Productos">Burger Clásica, Muestra de Sushi</td>
-                                <td data-label="Cantidad">3</td>
-                                <td data-label="Total">S/ 29.99</td>
-                                <td data-label="Estado">
-                                    <span class="estado estado-preparando">🔄 Preparando</span>
-                                </td>
-                            </tr>
-
+                        <tbody id="tabla-pedidos-body">
+                            <!-- Los datos se cargan dinámicamente con JavaScript -->
                         </tbody>
 
                     </table>
@@ -198,6 +135,73 @@
         </div>
 
     </footer>
+
+    <!-- =========================================
+         SESIÓN 12 / 13 - JavaScript para cargar pedidos
+    ========================================= -->
+
+    <script>
+        // SESIÓN 12 / 13 - Cargar pedidos desde Node.js
+
+        const API_URL = "http://localhost:3000";
+
+        async function cargarPedidos() {
+            try {
+                const id_usuario = sessionStorage.getItem("savefood_id_usuario") || null;
+                let url = API_URL + "/pedidos";
+                if (id_usuario) {
+                    url += "/" + id_usuario;
+                }
+                const response = await fetch(url);
+                const pedidos = await response.json();
+                return pedidos;
+            } catch (error) {
+                console.error("Error al cargar pedidos:", error);
+                return [];
+            }
+        }
+
+        async function renderizarPedidos() {
+            const tbody = document.getElementById("tabla-pedidos-body");
+            if (!tbody) return;
+
+            const pedidos = await cargarPedidos();
+
+            if (pedidos.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align:center; padding:30px; color: #777;">
+                            📭 No hay pedidos registrados. ¡Haz tu primer pedido!
+                        </td>
+                    </tr>`;
+                return;
+            }
+
+            let html = "";
+            for (let i = 0; i < pedidos.length; i++) {
+                const p = pedidos[i];
+                const estadoClass = p.Estado === "Enviado" ? "estado-enviado" :
+                                    p.Estado === "En Proceso" ? "estado-proceso" : "estado-preparando";
+                const estadoIcon = p.Estado === "Enviado" ? "✅" :
+                                   p.Estado === "En Proceso" ? "⏳" : "🔄";
+                html += `
+                    <tr>
+                        <td data-label="N° Pedido">#${String(p.ID_Pedido).padStart(3, '0')}</td>
+                        <td data-label="Cliente">${p.Nombre_Cliente_Form}</td>
+                        <td data-label="Productos">${p.Productos || "Sin productos"}</td>
+                        <td data-label="Cantidad">${p.Cantidad_Total || 0}</td>
+                        <td data-label="Total">S/ ${parseFloat(p.Total_Pagar).toFixed(2)}</td>
+                        <td data-label="Estado">
+                            <span class="estado ${estadoClass}">${estadoIcon} ${p.Estado}</span>
+                        </td>
+                    </tr>`;
+            }
+            tbody.innerHTML = html;
+        }
+
+        // Cargar pedidos al iniciar la página
+        document.addEventListener("DOMContentLoaded", renderizarPedidos);
+    </script>
 
 </body>
 

@@ -22,6 +22,9 @@
                     <img src="resources/logo_full.svg" alt="Logo SaveFood" class="logo-img">
                 </a>
             </div>
+            
+            <input type="checkbox" id="menu-check" class="menu-check">
+            <label for="menu-check" class="menu-hamburguesa">☰</label>
 
             <ul class="enlaces-menu">
                 <li><a href="menu.html">Menú de Comidas</a></li>
@@ -119,6 +122,22 @@
             <p>&copy; 2026 SaveFood. Proyecto Final - Desarrollo Web.</p>
         </div>
     </footer>
+
+    <!-- =========================================
+    SESIÓN 13 - Mostrar nombre del usuario logueado
+    ========================================= -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const nombre = sessionStorage.getItem("savefood_usuario_activo");
+            if (nombre) {
+                const titulo = document.querySelector(".hero-contenido h1");
+                if (titulo) {
+                    titulo.innerHTML = `¡Hola ${nombre}!<br>Bienvenido a <strong>SaveFood</strong>.`;
+                }
+            }
+        });
+    </script>
 
 </body>
 

@@ -80,6 +80,11 @@ ul {
     color: #f57c00;
 }
 
+.menu-check, 
+.menu-hamburguesa {
+    display: none;
+}
+
 /* =========================================
    SESIÓN 02 - Página activa en el menú
    ========================================= */
@@ -92,7 +97,7 @@ ul {
 }
 
 /* =========================================
-   SESIÓN 13 - Carrito de compras (icono y contador)
+   SESIÓN 13 - Carrito de compras (icono, contador, dropdown)
    ========================================= */
 
 .carrito-icono {
@@ -102,7 +107,13 @@ ul {
     font-size: 18px;
     font-weight: 600;
     color: #2e7d32;
-    cursor: default;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.carrito-icono:hover {
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 .contador-carrito {
@@ -114,6 +125,53 @@ ul {
     font-weight: bold;
     min-width: 22px;
     text-align: center;
+}
+
+.carrito-contenedor-header {
+    position: relative;
+    cursor: pointer;
+}
+
+.dropdown-carrito {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    width: 280px;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    padding: 20px;
+    z-index: 1000;
+    border-radius: 10px;
+    /* PRE-ANIMACION */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease; 
+}
+
+/* ANIMACION */
+.dropdown-carrito.mostrar {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-carrito ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.dropdown-carrito a.btn-primario {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    text-decoration: none;
+    color: white;
+    background-color: #f57c00;
+    padding: 10px;
+    border-radius: 6px;
 }
 
 /* =========================================
@@ -669,11 +727,12 @@ ul {
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 30px;
-    display: none;
+    /*display: none;*/
+    animation: fadeInUp 0.6s ease forwards;
 }
 
 .resumen-carrito.visible {
-    display: block;
+    /*display: block;*/
     animation: fadeInUp 0.6s ease forwards;
 }
 
@@ -979,20 +1038,40 @@ ul {
 @media (max-width: 768px) {
 
     .navegacion {
-        flex-direction: column;
-        gap: 15px;
-        padding: 15px 10px;
-    }
-
-    .enlaces-menu {
+        flex-direction: row;
         flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
+        padding: 15px 20px;
     }
 
+    .menu-check {
+        display: none;
+    }
+
+    /* Mostrar el ícono ☰ y estilos del menu hamburguesa */
+    .menu-hamburguesa {
+        display: block;
+        font-size: 28px;
+        color: #2e7d32;
+        cursor: pointer;
+        padding: 5px;
+    }
+
+    /* Ocultamos los menús por defecto en móvil */
+    .enlaces-menu, 
     .accesos-usuario {
+        display: none;
         width: 100%;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    /* Cuando el checkbox esté marcado (:checked), busca a sus hermanos (~),
+        .enlaces-menu y .accesos-usuario, y muéstralos */
+    .menu-check:checked ~ .enlaces-menu,
+    .menu-check:checked ~ .accesos-usuario {
+        display: flex !important;
     }
 
     .card {
