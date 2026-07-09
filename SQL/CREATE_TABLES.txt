@@ -1,0 +1,51 @@
+-- 1. Tabla USUARIO
+CREATE TABLE USUARIO (
+    ID_Usuario SERIAL PRIMARY KEY,
+    Nombre VARCHAR(40) NOT NULL,
+    Apellido VARCHAR(40) NOT NULL,
+    Correo VARCHAR(100) UNIQUE NOT NULL,
+    Username VARCHAR(30) UNIQUE NOT NULL,
+    Contrasena VARCHAR(255) NOT NULL
+);
+
+-- 2. Tabla RESTAURANTE
+CREATE TABLE RESTAURANTE (
+    ID_Restaurante SERIAL PRIMARY KEY,
+    Nombre_Restaurante VARCHAR(100) NOT NULL
+);
+
+-- 3. Tabla PRODUCTO
+CREATE TABLE PRODUCTO (
+    ID_Producto SERIAL PRIMARY KEY,
+    ID_Restaurante INT REFERENCES RESTAURANTE(ID_Restaurante),
+    Nombre_Producto VARCHAR(100) NOT NULL,
+    Descripcion TEXT,
+    Precio_Original NUMERIC(10,2) NOT NULL,
+    Precio_Descuento NUMERIC(10,2) NOT NULL,
+    Ruta_Imagen VARCHAR(255) NOT NULL,
+    Indicador_Urgencia VARCHAR(50),
+    Tipo VARCHAR(30) NOT NULL
+);
+
+-- 4. Tabla PEDIDO
+CREATE TABLE PEDIDO (
+    ID_Pedido SERIAL PRIMARY KEY,
+    ID_Usuario INT REFERENCES USUARIO(ID_Usuario),
+    Nombre_Cliente_Form VARCHAR(100) NOT NULL,
+    Correo_Form VARCHAR(100) NOT NULL,
+    Telefono_Form VARCHAR(15) NOT NULL,
+    Direccion_Entrega VARCHAR(150) NOT NULL,
+    Cantidad_Personas INT NOT NULL DEFAULT 1,
+    Notas_Especiales TEXT,
+    Total_Pagar NUMERIC(10,2) NOT NULL,
+    Estado VARCHAR(20) DEFAULT 'Preparando'
+);
+
+-- 5. Tabla DETALLE_PEDIDO
+CREATE TABLE DETALLE_PEDIDO (
+    ID_Detalle SERIAL PRIMARY KEY,
+    ID_Pedido INT REFERENCES PEDIDO(ID_Pedido),
+    ID_Producto INT REFERENCES PRODUCTO(ID_Producto),
+    Cantidad INT NOT NULL,
+    Subtotal NUMERIC(10,2) NOT NULL
+);

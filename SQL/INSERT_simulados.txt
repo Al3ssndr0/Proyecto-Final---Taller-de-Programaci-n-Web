@@ -1,0 +1,46 @@
+-- 1. Inserción de Restaurantes Categorizados
+INSERT INTO RESTAURANTE (Nombre_Restaurante) VALUES 
+('Pollería El Carbón'),       -- ID 1: Pollo a la brasa
+('Sazón Criolla'),            -- ID 2: Comida peruana/criolla
+('Pastelería Dulce Pecado'),  -- ID 3: Postres
+('Taquería Los Cuates'),      -- ID 4: Comida mexicana
+('Burger Factory'),           -- ID 5: Hamburguesas
+('Sakura Sushi Bar'),         -- ID 6: Comida japonesa
+('Trattoria Bella Italia'),   -- ID 7: Pastas y Pizzas
+('El Puerto Marino'),         -- ID 8: Pescados y Mariscos
+('Verde & Fresco');           -- ID 9: Ensaladas y comida saludable
+
+-- 2. Inserción de Productos con su respectiva Clave Foránea (ID_Restaurante)
+INSERT INTO PRODUCTO (ID_Restaurante, Nombre_Producto, Descripcion, Precio_Original, Precio_Descuento, Ruta_Imagen, Indicador_Urgencia, Tipo) VALUES 
+-- COMIDA MEXICANA (ID 4)
+(4, 'Tacos al Pastor', 'Deliciosos tacos mexicanos con carne marinada, cebolla y cilantro fresco.', 18.00, 14.90, 'resources/tacos.png', NULL, 'mixto'),
+
+-- HAMBURGUESAS (ID 5)
+(5, 'Burger Clásica', 'Hamburguesa artesanal con queso cheddar, vegetales frescos y papas fritas.', 15.50, 11.99, 'resources/burger.png', NULL, 'mixto'),
+
+-- COMIDA JAPONESA (ID 6)
+(6, 'Muestra de Sushi', 'Sushi premium con salmón, aguacate y salsa especial.', 22.00, 18.00, 'resources/sushi.png', NULL, 'mixto'),
+
+-- COMIDA ITALIANA (ID 7)
+(7, 'Pasta Alfredo', 'Fettuccine en cremosa salsa de parmesano y mantequilla.', 24.00, 18.50, 'resources/pasta.png', NULL, 'mixto'),
+(7, 'Pizza Margarita', 'Masa artesanal con salsa de tomate, mozzarella y albahaca.', 28.00, 22.00, 'resources/pizza.png', NULL, 'mixto'),
+
+-- ENSALADAS / SALUDABLE (ID 9)
+(9, 'Ensalada César', 'Lechuga romana, pollo a la plancha, crutones y aderezo César.', 16.00, 11.90, 'resources/ensalada.png', NULL, 'mixto'),
+
+-- CEVICHERÍA / MARISCOS (ID 8)
+(8, 'Ceviche Mixto', 'Fresco pescado y mariscos marinados en jugo de limón, con cebolla, ají y cilantro.', 32.00, 24.00, 'resources/ceviche.png', NULL, 'mixto'),
+
+-- COMIDA CRIOLLA (ID 2)
+(2, 'Arroz con Pollo', 'Tiernos trozos de pollo con arroz verde, acompañado de ensalada y ají.', 22.00, 16.50, 'resources/arroz_pollo.png', NULL, 'mixto'),
+(2, 'Lomo Saltado', 'Salteado de carne de res con cebolla, tomate y papas fritas, servido con arroz.', 26.00, 19.90, 'resources/lomo_saltado.png', NULL, 'mixto'),
+(2, 'Ají de Gallina', 'Cremoso guiso de gallina deshilachada con ají amarillo y nueces, acompañado de arroz.', 20.00, 15.00, 'resources/aji_gallina.png', NULL, 'mixto'),
+(2, 'Causa Rellena', 'Capas de papa amarilla rellenas con pollo o atún, con palta y huevo.', 18.00, 13.50, 'resources/causa.png', NULL, 'mixto'),
+
+-- POLLERÍA (ID 1)
+(1, 'Pollo a la Brasa', 'Jugoso pollo asado al estilo brasa, con papas fritas y ensalada fresca.', 60.00, 50.00, 'resources/pollo_brasa.png', NULL, 'mixto'),
+
+-- === OFERTAS FLASH ===
+(1, 'Pack Familiar: Pollo a la Brasa', 'Oferta flash de pollo a la brasa.', 65.00, 30.00, 'resources/pollo_brasa.png', '⏳ ¡Últimas 2 unidades!', 'mixto'),
+(2, 'Menú Ejecutivo: Lomo Saltado', 'Oferta flash de lomo saltado.', 18.00, 8.00, 'resources/lomo_saltado.png', '🔥 ¡Vence en 45 minutos!', 'mixto'),
+(3, 'Caja Sorpresa de Postres', 'Caja sorpresa dulce.', 25.00, 10.00, 'resources/logo_full.svg', '⏳ ¡Última unidad!', 'postre');
