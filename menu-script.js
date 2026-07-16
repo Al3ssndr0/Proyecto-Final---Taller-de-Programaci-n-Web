@@ -36,24 +36,43 @@ cargarCarrito();
    AGREGAR PRODUCTO
 ============================================ */
 
-function agregarAlCarrito(id_producto, nombre, precio) {
+function agregarAlCarrito(id_producto, nombre, precio, stock_disponible) {
     let encontrado = carrito.find(item => item.id_producto == id_producto);
 
     if (encontrado) {
-        encontrado.cantidad++;
+        if (encontrado.cantidad < stock_disponible) {
+            encontrado.cantidad++;
+            alert("Añadiste otra unidad de " + nombre);
+        } else {
+            alert("⚠️ Lo sentimos, solo hay " + stock_disponible + " unidades disponibles en stock.");
+            return;
+        }
     } else {
-        carrito.push({
-            id_producto: id_producto,
-            nombre: nombre,
-            precio: Number(precio),
-            cantidad: 1
-        });
+        if (stock_disponible > 0) {
+            carrito.push({
+                id_producto: id_producto,
+                nombre: nombre,
+                precio: Number(precio),
+                cantidad: 1,
+                stock: stock_disponible // Guardamos el límite de stock en memoria
+            });
+            alert(nombre + " agregado al carrito.");
+        } else {
+            alert("Producto agotado.");
+            return;
+        }
     }
 
     guardarCarrito();
     actualizarContadorCarrito();
-
-    alert(nombre + " agregado al carrito.");
+    
+    // Actualizar visualmente si los menús están abiertos
+    if (document.getElementById("dropdown-carrito") && document.getElementById("dropdown-carrito").classList.contains("mostrar")) {
+        renderizarDropdown();
+    }
+    if (document.getElementById("resumen-carrito")) {
+        renderizarCarrito();
+    }
 }
 
 
@@ -106,32 +125,22 @@ function vaciarCarrito() {
 ============================================ */
 
 async function cargarProductosDesdeBD() {
-
     try {
-
         const response = await fetch(API_URL + "/productos");
-
         const productos = await response.json();
-
         crearCards(productos);
-
         crearTabla(productos);
-
     }
 
     catch (error) {
-
         console.error(error);
-
     }
-
 }
 /* ============================================
    CREAR TARJETAS DESDE MYSQL
 ============================================ */
 
 function crearCards(productos) {
-
     const contenedor = document.getElementById("contenedor-menu");
     if (!contenedor) return;
     contenedor.innerHTML = "";
@@ -139,20 +148,15 @@ function crearCards(productos) {
     productos.forEach(producto => {
         contenedor.innerHTML += `
         <article class="card">
-            <img
-                src="${producto.Ruta_Imagen}"
-                alt="${producto.Nombre_Producto}">
-
+            <img src="${producto.Ruta_Imagen}" alt="${producto.Nombre_Producto}">
             <div class="contenido">
                 <h2>${producto.Nombre_Producto}</h2>
                 <p class="descripcion">${producto.Descripcion}</p>
-
-                <p class="precio-original">
-                    S/ ${parseFloat(producto.Precio_Original).toFixed(2)}
-                </p>
-
-                <p class="precio-descuento">
-                    S/ ${parseFloat(producto.Precio_Descuento).toFixed(2)}
+                <p class="precio-original">S/ ${parseFloat(producto.Precio_Original).toFixed(2)}</p>
+                <p class="precio-descuento">S/ ${parseFloat(producto.Precio_Descuento).toFixed(2)}</p>
+                
+                <p style="color: #e65c00; font-weight: bold; font-size: 14px; margin-bottom: 10px;">
+                    📦 Stock disponible: ${producto.Stock}
                 </p>
 
                 <button
@@ -160,7 +164,8 @@ function crearCards(productos) {
                     onclick="agregarAlCarrito(
                         ${producto.ID_Producto},
                         '${producto.Nombre_Producto.replace(/'/g, "\\'")}',
-                        ${producto.Precio_Descuento}
+                        ${producto.Precio_Descuento},
+                        ${producto.Stock}
                     )">
                     Añadir al carrito
                 </button>
@@ -184,20 +189,18 @@ function crearTabla(productos) {
         tabla.innerHTML += `
         <tr>
             <td>${producto.Nombre_Producto}</td>
-
             <td>${producto.Descripcion}</td>
-
             <td>S/ ${parseFloat(producto.Precio_Original).toFixed(2)}</td>
-
             <td>S/ ${parseFloat(producto.Precio_Descuento).toFixed(2)}</td>
-
             <td>
+                <span style="font-size: 12px; color: #777;">(Stock: ${producto.Stock})</span><br>
                 <button
                     class="btn-animado btn-tabla"
                     onclick="agregarAlCarrito(
                         ${producto.ID_Producto},
                         '${producto.Nombre_Producto.replace(/'/g, "\\'")}',
-                        ${producto.Precio_Descuento}
+                        ${producto.Precio_Descuento},
+                        ${producto.Stock}
                     )">
                     Añadir
                 </button>
@@ -206,55 +209,8 @@ function crearTabla(productos) {
         `;
     });
 }
-/* ============================================
-   RENDERIZAR CARRITO
-============================================ */
-/*
-function renderizarCarrito() {
 
-    const contenedor = document.getElementById("resumen-carrito");
-
-    if (!contenedor) return;
-    cargarCarrito();
-
-    if (carrito.length === 0) {
-        contenedor.innerHTML = `
-            <p class="carrito-vacio">
-                🛒 Tu carrito está vacío.
-            </p>
-        `;
-        return;
-    }
-
-    let html = `
-        <h3>🛒 Resumen del Pedido</h3>
-        <ul class="lista-carrito">
-    `;
-
-    carrito.forEach(item => {
-        html += `
-            <li>
-                <strong>${item.nombre}</strong>
-                <br>
-                Cantidad:
-                ${item.cantidad}
-                <br>
-                Subtotal:
-                S/ ${(item.precio * item.cantidad).toFixed(2)}
-            </li>
-        `;
-    });
-
-    html += `
-        </ul>
-        <hr>
-        <h3>
-            Total: S/ ${calcularTotalCarrito()}
-        </h3>
-    `;
-    contenedor.innerHTML = html;
-}
-*/
+// Renderizar Carrito
 function renderizarCarrito() {
     console.log("Paso 1: Iniciando renderizarCarrito...");
 
@@ -286,10 +242,15 @@ function renderizarCarrito() {
 
     carrito.forEach(item => {
         html += `
-            <li>
+            <li style="margin-bottom: 10px;">
                 <strong>${item.nombre}</strong> <br>
-                Cantidad: ${item.cantidad} <br>
-                Subtotal: S/ ${(item.precio * item.cantidad).toFixed(2)}
+                Subtotal: S/ ${(item.precio * item.cantidad).toFixed(2)} <br>
+                
+                <div class="control-cantidad">
+                    <button type="button" onclick="disminuirCantidad(${item.id_producto})">-</button>
+                    <span>${item.cantidad}</span>
+                    <button type="button" onclick="aumentarCantidad(${item.id_producto})">+</button>
+                </div>
             </li>
         `;
     });
@@ -334,7 +295,18 @@ function renderizarDropdown() {
 
     let html = "<ul>";
     carrito.forEach(item => {
-        html += `<li>${item.nombre} (x${item.cantidad}) - S/ ${(item.precio * item.cantidad).toFixed(2)}</li>`;
+        html += `
+            <li style="margin-bottom: 10px;">
+                <strong>${item.nombre}</strong> <br>
+                Subtotal: S/ ${(item.precio * item.cantidad).toFixed(2)} <br>
+                
+                <div class="control-cantidad">
+                    <button type="button" onclick="disminuirCantidad(${item.id_producto})">-</button>
+                    <span>${item.cantidad}</span>
+                    <button type="button" onclick="aumentarCantidad(${item.id_producto})">+</button>
+                </div>
+            </li>
+        `;
     });
     html += "</ul>";
     html += `<p><strong>Total: S/ ${calcularTotalCarrito()}</strong></p>`;
@@ -347,25 +319,97 @@ function renderizarDropdown() {
 ============================================ */
 
 async function cargarOfertasDesdeBD() {
-
     try {
-
         const response = await fetch(API_URL + "/ofertas");
-
         const productos = await response.json();
-
-        crearCards(productos);
-
+        
+        // Usamos la nueva función especializada en ofertas
+        crearCardsOfertas(productos);
+    } catch (error) {
+        console.error("Error al cargar ofertas:", error);
     }
-
-    catch (error) {
-
-        console.error(error);
-
-    }
-
 }
 
+function crearCardsOfertas(productos) {
+    const contenedor = document.getElementById("contenedor-ofertas");
+    if (!contenedor) return;
+    contenedor.innerHTML = "";
+
+    if (productos.length === 0) {
+        contenedor.innerHTML = "<p style='grid-column: 1 / -1; text-align: center; color: #666;'>No hay ofertas flash en este momento.</p>";
+        return;
+    }
+
+    productos.forEach(producto => {
+        const textoUrgencia = producto.Indicador_Urgencia;
+        let claseUrgencia = "indicador-urgencia";
+        if (textoUrgencia && (textoUrgencia.includes("🔥") || textoUrgencia.toLowerCase().includes("minuto"))) {
+            claseUrgencia += " urgencia-alta";
+        }
+
+        contenedor.innerHTML += `
+            <article class="tarjeta-oferta">
+                <div class="${claseUrgencia}">${textoUrgencia}</div>
+                <div class="oferta-contenido">
+                    <h3 class="producto-nombre">${producto.Nombre_Producto}</h3>
+                    <p class="producto-restaurante">${producto.Nombre_Restaurante}</p>
+                    <div class="producto-precios">
+                        <span class="precio-original">S/ ${parseFloat(producto.Precio_Original).toFixed(2)}</span>
+                        <span class="precio-descuento">S/ ${parseFloat(producto.Precio_Descuento).toFixed(2)}</span>
+                    </div>
+                    
+                    <p style="color: #e65c00; font-weight: bold; font-size: 14px; margin-top: 5px; margin-bottom: 10px;">
+                        📦 Stock: ${producto.Stock}
+                    </p>
+
+                    <button class="btn-primario btn-ancho-completo"
+                            onclick="agregarAlCarrito(
+                                ${producto.ID_Producto},
+                                '${producto.Nombre_Producto.replace(/'/g, "\\'")}',
+                                ${producto.Precio_Descuento},
+                                ${producto.Stock}
+                            )">
+                        Añadir al Pedido
+                    </button>
+                </div>
+            </article>
+        `;
+    });
+}
+
+// Gestión de la cantidad de productos a pedir
+function aumentarCantidad(id) {
+    let item = carrito.find(p => p.id_producto == id);
+    if (item) {
+        if (item.cantidad < item.stock) {
+            item.cantidad++;
+            actualizarVistasCarrito();
+        } else {
+            alert("⚠️ Límite de stock alcanzado.");
+        }
+    }
+}
+
+function disminuirCantidad(id) {
+    let item = carrito.find(p => p.id_producto == id);
+    if (item) {
+        if (item.cantidad > 1) {
+            item.cantidad--;
+        } else {
+            // Si la cantidad llega a 0, lo eliminamos del carrito
+            carrito = carrito.filter(p => p.id_producto != id);
+        }
+        actualizarVistasCarrito();
+    }
+}
+
+// Función auxiliar para no repetir código
+function actualizarVistasCarrito() {
+    guardarCarrito();
+    actualizarContadorCarrito();
+    if (document.getElementById("dropdown-carrito") && document.getElementById("dropdown-carrito").classList.contains("mostrar")) renderizarDropdown();
+    if (document.getElementById("resumen-carrito")) renderizarCarrito();
+}
 
 /* ============================================
    INICIAR

@@ -15,14 +15,8 @@
 
 <body>
 
-    <!-- =========================================
-         SESIÓN 02 - ENCABEZADO DEL SITIO
-    ========================================= -->
-
     <header class="header-principal">
-
         <nav class="navegacion">
-
             <div class="logo">
                 <a href="index.html">
                     <img src="resources/logo_full.svg"
@@ -30,85 +24,76 @@
                         alt="Logo SaveFood">
                 </a>
             </div>
-
             <input type="checkbox" id="menu-check" class="menu-check">
             <label for="menu-check" class="menu-hamburguesa">☰</label>
-
             <ul class="enlaces-menu">
                 <li><a href="menu.html">Menú</a></li>
                 <li><a href="ofertas.html">Ofertas</a></li>
                 <li><a href="form_pedido.html">Pedidos</a></li>
                 <li><a href="pedidos.html">Mis Pedidos</a></li>
             </ul>
-
         </nav>
-
     </header>
 
-    <!-- =========================================
-         SESIÓN 03 / 10 - FORMULARIO DE INICIO DE SESIÓN
-    ========================================= -->
-
-    <!-- Eliminada la clase grid-layout para mantener el centrado vertical -->
     <main class="contenedor-login">
-
         <div class="card-login">
-
             <h1>Bienvenido</h1>
-
             <p>
                 Inicia sesión para continuar utilizando SaveFood.
             </p>
 
-            <form id="loginForm">
+            <form id="loginForm" novalidate>
 
-                <label for="usuario">Usuario</label>
+                <div class="campo-form">
+                    <label for="usuario">Usuario</label>
+                    <input
+                        type="text"
+                        id="usuario"
+                        name="usuario"
+                        placeholder="Ingrese su usuario"
+                        maxlength="30">
+                    <div class="mensaje-error" id="error-usuario"></div>
+                </div>
 
-                <input
-                    type="text"
-                    id="usuario"
-                    name="usuario"
-                    placeholder="Ingrese su usuario"
-                    maxlength="30"
-                    required>
+                <div class="campo-form">
+                    <label for="clave">Contraseña</label>
+                    <div class="input-con-password">
+                        <input
+                            type="password"
+                            id="clave"
+                            name="clave"
+                            placeholder="Ingrese su contraseña"
+                            maxlength="30">
+                        <button type="button" class="btn-ver-password" data-target="clave" aria-label="Mostrar contraseña">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 5c-6 0-9 7-9 7s3 7 9 7 9-7 9-7-3-7-9-7Z"></path>
+                                <circle cx="12" cy="12" r="2.5"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="mensaje-error" id="error-clave"></div>
+                </div>
 
-                <label for="clave">Contraseña</label>
+                <div class="mensaje-form" id="mensaje-login"></div>
 
-                <input
-                    type="password"
-                    id="clave"
-                    name="clave"
-                    placeholder="Ingrese su contraseña"
-                    maxlength="30"
-                    required>
                 <button
                     type="submit"
                     class="btn-login-form">
-
                     Iniciar Sesión
-
                 </button>
 
             </form>
 
             <p class="texto-login">
-
                 ¿No tienes una cuenta?
-
                 <a href="registrar.html">
-
                     Regístrate aquí
-
                 </a>
-
             </p>
 
         </div>
-
     </main>
 
     <script src="script.js"></script>
-
 </body>
-
 </html>
